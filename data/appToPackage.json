@@ -1,0 +1,23 @@
+{
+  "CMOPTAccountTypeCallReason": "cmoptaccounttypecallreason.inbound.rt",
+  "CMOPTITSS": "cmoptitss.inbound.rt",
+  "CMOPTRxSpecialityCampaignName": "cmoptrxspecialitycampaignname.inbound.rt",
+  "CMOPTRxSpecialityClientName": "cmoptrxspecialityclientname.inbound.rt",
+  "CMOPTRxSpecialityTherapyCode": "cmoptrxspecialitytherapycode.inbound.rt",
+  "CMRegressionTestApp": "cmregressiontestapp.inbound.rt",
+  "CMUHCCSEligibility": "cmuhccseligibility.inbound.rt",
+  "CMUHCCSRouting": "cmuhccsrouting.inbound.rt",
+  "CMUHCCallerIntent": "cmuhccallerintent.inbound.rt",
+  "CMUHCCrossChannel": "cmuhccrosschannel.inbound.rt",
+  "CMUHCDental": "cmuhcdental.inbound.rt",
+  "CMUHCEIClaimsDenial": "cmuhceiclaimsdenial.inbound.rt",
+  "CMUHCEIFastPass": "cmuhceifastpass.inbound.rt",
+  "CMUHCEIPrime": "cmuhceiprime.inbound.rt",
+  "CMUHCEIRouting": "cmuhceirouting.inbound.rt",
+  "CMUHCEISpecialtyIVR": "cmuhceispecialtyivr.inbound.rt",
+  "CMUHCMRProviderRestriction": "cmuhcmrproviderrestriction.inbound.rt",
+  "CMUHCMRRouting": "cmuhcmrrouting.inbound.rt",
+  "CMUHCPACRouting": "cmuhcpacrouting.inbound.rt",
+  "CMUHCRepeatCaller": "cmuhcrepeatcaller.inbound.rt",
+  "CMUHCVision": "cmuhcvision.inbound.rt"
+}
