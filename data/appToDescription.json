@@ -1,0 +1,23 @@
+{
+  "CMOPTAccountTypeCallReason": "Inbound Rule",
+  "CMOPTITSS": "Inbound Rule",
+  "CMOPTRxSpecialityCampaignName": "Inbound Rule",
+  "CMOPTRxSpecialityClientName": "Inbound Rule",
+  "CMOPTRxSpecialityTherapyCode": "Inbound Rule",
+  "CMRegressionTestApp": "Inbound Rule",
+  "CMUHCCSEligibility": "Inbound Rule",
+  "CMUHCCSRouting": "Inbound Rule",
+  "CMUHCCallerIntent": "Inbound Rule",
+  "CMUHCCrossChannel": "Inbound Rule",
+  "CMUHCDental": "Inbound Rule",
+  "CMUHCEIClaimsDenial": "Inbound Rule",
+  "CMUHCEIFastPass": "Inbound Rule",
+  "CMUHCEIPrime": "Inbound Rule",
+  "CMUHCEIRouting": "Inbound Rule",
+  "CMUHCEISpecialtyIVR": "Inbound Rule",
+  "CMUHCMRProviderRestriction": "Inbound Rule",
+  "CMUHCMRRouting": "Inbound Rule",
+  "CMUHCPACRouting": "Inbound Rule",
+  "CMUHCRepeatCaller": "Inbound Rule",
+  "CMUHCVision": "Inbound Rule"
+}
