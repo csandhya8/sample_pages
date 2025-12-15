@@ -1,0 +1,29 @@
+{
+  "CM_CodeDepot": [
+    "CMRegressionTestApp"
+  ],
+  "CM_OPT": [
+    "CMOPTAccountTypeCallReason",
+    "CMOPTITSS",
+    "CMOPTRxSpecialityCampaignName",
+    "CMOPTRxSpecialityClientName",
+    "CMOPTRxSpecialityTherapyCode"
+  ],
+  "CM_UHC": [
+    "CMUHCCSEligibility",
+    "CMUHCCSRouting",
+    "CMUHCCallerIntent",
+    "CMUHCCrossChannel",
+    "CMUHCDental",
+    "CMUHCEIClaimsDenial",
+    "CMUHCEIFastPass",
+    "CMUHCEIPrime",
+    "CMUHCEIRouting",
+    "CMUHCEISpecialtyIVR",
+    "CMUHCMRProviderRestriction",
+    "CMUHCMRRouting",
+    "CMUHCPACRouting",
+    "CMUHCRepeatCaller",
+    "CMUHCVision"
+  ]
+}
