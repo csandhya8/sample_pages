@@ -1,5 +1,5 @@
 
-// assets/app.js — LOB → App cascade + package display
+// assets/app.js — Diagnostic build: LOB → App cascade + package display
 
 function $(id) { return document.getElementById(id); }
 
@@ -47,6 +47,12 @@ function loadSelection() {
   } catch { return {}; }
 }
 
+function diag(label, value) {
+  console.log(`[GRS] ${label}:`, value);
+  const el = $('status');
+  el.textContent = `${label}: ${typeof value === 'string' ? value : JSON.stringify(value)}`;
+}
+
 async function init() {
   const lobSel = $('lobSel');
   const appSel = $('appSel');
@@ -57,7 +63,6 @@ async function init() {
 
   let lobToApps, appToPackage, appToDescription;
   try {
-    // Ensure these files exist under /data/
     [lobToApps, appToPackage, appToDescription] = await Promise.all([
       fetchJSON('data/lobToApps.json'),
       fetchJSON('data/appToPackage.json'),
@@ -69,54 +74,73 @@ async function init() {
     return;
   }
 
-  // Populate LOBs
+  const hasRTL = lobToApps && typeof lobToApps === 'object';
+  const hasPkg = appToPackage && typeof appToPackage === 'object';
+  const hasDesc = appToDescription && typeof appToDescription === 'object';
+  diag('Loaded sections', { lobToApps: hasRTL, appToPackage: hasPkg, appToDescription: hasDesc });
+
+  if (!hasRTL) {
+    setStatus('No LOB data found (lobToApps.json missing or invalid).', 'error');
+    return;
+  }
+
   const lobList = Object.keys(lobToApps).sort();
-  setOptions(lobSel, lobList, 'Select LOB');
+  diag('LOB list', lobList);
+  setOptions(lobSel, lobList, lobList.length ? 'Select LOB' : 'No LOBs found');
+
+  if (!lobList.length) {
+    setStatus('LOB list is empty. Check data/lobToApps.json content.', 'error');
+    appSel.disabled = true;
+    updateSummary({ lob: '', app: '', pkg: '', desc: '' });
+    return;
+  }
+
   setStatus(`Loaded ${lobList.length} LOBs.`);
 
-  // Restore previous selection if available
+  // Restore previous selection
   const saved = loadSelection();
   if (saved.lob && lobList.includes(saved.lob)) {
     lobSel.value = saved.lob;
     const apps = lobToApps[saved.lob] || [];
     setOptions(appSel, apps, apps.length ? 'Select App' : 'No apps found');
     appSel.disabled = apps.length === 0;
+    diag('Apps for saved LOB', apps);
 
     if (saved.app && apps.includes(saved.app)) {
       appSel.value = saved.app;
-      const pkg = appToPackage[saved.app] || '—';
-      const desc = appToDescription[saved.app] || '—';
+      const pkg = hasPkg ? (appToPackage[saved.app] || '—') : '—';
+      const desc = hasDesc ? (appToDescription[saved.app] || '—') : '—';
       updateSummary({ lob: saved.lob, app: saved.app, pkg, desc });
     } else {
       updateSummary({ lob: saved.lob, app: '', pkg: '', desc: '' });
     }
   } else {
-    // Initial state
     appSel.disabled = true;
     updateSummary({ lob: '', app: '', pkg: '', desc: '' });
   }
 
-  // LOB change → populate apps and reset package/desc
+  // LOB change → Apps
   lobSel.addEventListener('change', () => {
     const lob = lobSel.value;
     const apps = lob ? (lobToApps[lob] || []) : [];
+    diag(`Apps under ${lob}`, apps);
     setOptions(appSel, apps, apps.length ? 'Select App' : 'No apps found');
     appSel.disabled = apps.length === 0;
     saveSelection({ lob, app: '' });
     updateSummary({ lob, app: '', pkg: '', desc: '' });
   });
 
-  // App change → show package/desc
+  // App change → Package/Desc
   appSel.addEventListener('change', () => {
     const lob = lobSel.value;
     const app = appSel.value;
-    const pkg = app ? (appToPackage[app] || '—') : '—';
-    const desc = app ? (appToDescription[app] || '—') : '—';
+    const pkg = hasPkg ? (appToPackage[app] || '—') : '—';
+    const desc = hasDesc ? (appToDescription[app] || '—') : '—';
+    diag(`Resolved for ${app}`, { package: pkg, description: desc });
     saveSelection({ lob, app });
     updateSummary({ lob, app, pkg, desc });
   });
 
-  // Clear
   clearBtn.addEventListener('click', () => {
     localStorage.removeItem('lobApp');
     lobSel.value = '';
@@ -126,13 +150,11 @@ async function init() {
     setStatus('Cleared.', 'info');
   });
 
-  // Reload (re-fetch)
   reloadBtn.addEventListener('click', () => {
     init();
   });
 }
 
-// Boot
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
