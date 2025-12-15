@@ -1,0 +1,66 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LOB → App → Rule Package (GRS)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  assets/styles.css
+</head>
+<body>
+  <header>
+    <h1>Rules: LOB → App → Package</h1>
+    <p class="sub">
+      Data: <code>data/lobToApps.json</code>, <code>data/appToPackage.json</code>, <code>data/appToDescription.json</code>
+    </p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <label for="lobSel">Target LOB</label>
+      <select id="lobSel">
+        <option value="">Loading LOBs…</option>
+      </select>
+    </section>
+
+    <section class="panel">
+      <label for="appSel">Rule App (depends on LOB)</label>
+      <select id="appSel" disabled>
+        <option value="">Select an App</option>
+      </select>
+    </section>
+
+    <section class="panel">
+      <div class="kv">
+        <div class="k">Selected LOB</div>
+        <div class="v" id="lobOut">—</div>
+      </div>
+      <div class="kv">
+        <div class="k">Selected App</div>
+        <div class="v" id="appOut">—</div>
+      </div>
+      <div class="kv">
+        <div class="k">Rule Package Name</div>
+        <div class="v" id="pkgOut"><span class="muted">—</span></div>
+      </div>
+      <div class="kv">
+        <div class="k">Description</div>
+        <div class="v" id="descOut"><span class="muted">—</span></div>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="clearBtn">Clear</button>
+      <button id="reloadBtn">Reload</button>
+    </section>
+
+    <p id="status" class="status"></p>
+  </main>
+
+  <footer>
+    <small>GRS • Sandhya</small>
+  </footer>
+
+  assets/app.js</script>
+</body>
+</html>
